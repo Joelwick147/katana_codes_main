@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Ball following pointer or screen touch</title>
+  <style>
+    #ball {
+      position: absolute;
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      /* Removed gradient, set solid color */
+      background-color: #004687;
+      left: 50%;
+      top: 50%;
+      transform: translate(-50%, -50%);
+      pointer-events: none;
+      /* Smoother transition */
+      transition: transform 0.05s linear;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+      z-index: 1000;
+    }
+    body {
+      margin: 0;
+      height: 100vh;
+      overflow: hidden;
+      background: #f0f0f0;
+      /* Add a subtle background for the trace effect */
+      background-image: radial-gradient(circle, #f0f0f0 1px, transparent 1px);
+      background-size: 20px 20px;
+    }
+
+    /* Styling for the trace elements */
+    .trace {
+      position: absolute;
+      width: 20px; /* Smaller trace size */
+      height: 20px; /* Smaller trace size */
+      border-radius: 50%;
+      background-color: rgba(0, 70, 135, 0.1); /* Faint trace color */
+      pointer-events: none;
+      z-index: 999; /* Behind the ball */
+      transition: opacity 0.5s ease-out; /* Fade out the trace */
+    }
+  </style>
+</head>
+<body>
+  <div id="ball"></div>
+
+  <script>
+    const ball = document.getElementById('ball');
+    const body = document.body;
+
+    // Move the ball to any position and leave a trace
+    function moveBall(x, y) {
+      // Create a trace element
+      const trace = document.createElement('div');
+      trace.classList.add('trace');
+      trace.style.left = `${x}px`;
+      trace.style.top = `${y}px`;
+      body.appendChild(trace);
+
+      // Fade out and remove the trace after a short delay
+      setTimeout(() => {
+        trace.style.opacity = '0';
+        setTimeout(() => {
+          body.removeChild(trace);
+        }, 500); // Match the transition duration
+      }, 50); // Delay before starting to fade
+
+      // Move the main ball
+      ball.style.left = `${x + 10}px`; // Adjust for trace size
+      ball.style.top = `${y + 10}px`; // Adjust for trace size
+    }
+
+    // Track the mouse movement
+    document.addEventListener('mousemove', (e) => {
+      moveBall(e.clientX - 20, e.clientY - 20); // Center the ball
+    });
+
+    // Track the ball when one is using a phone
+    document.addEventListener('touchmove', (e) => {
+      e.preventDefault(); // Prevent scrolling
+      const touch = e.touches[0];
+      moveBall(touch.clientX - 20, touch.clientY - 20);
+    }, { passive: false });
+
+    //Appearing of the ball if the phone screen is tapped
+    document.addEventListener('click', (e) => {
+      moveBall(e.clientX - 20, e.clientY - 20);
+    });
+
+    // Handle initial position
+    window.addEventListener('load', () => {
+      moveBall(window.innerWidth / 2 - 20, window.innerHeight / 2 - 20);
+    });
+  </script>
+</body>
+</html>

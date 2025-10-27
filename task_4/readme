@@ -1,0 +1,63 @@
+Password Strength Checker Flask App
+
+#This Flask-based web application validates the strength of user passwords according to custom rules:
+
+-Password must be exactly 9 characters long
+-Must contain at least 4 characters
+-Must contain at least 2 letters
+-Must contain at least 3 alphanumeric(special characters)
+
+#The app provides clear success or error messages and can be extended with enhanced UX features such as WTForms or JavaScript validation.
+
+##Features
+- Built with Flask
+- Styled using Bootstrap 5
+-Immediate feedback on password validity after form submission
+-Simple and clean user interface with HTML templates
+
+##Technical stack
+-Flask/python
+-html
+-css
+-bootstrap
+-javascript
+
+
+##Installation and Setup
+Prerequisites
+-Python 3.7 or higher
+-Flask web framework (pip install flask)
+
+##Installation Steps
+-Clone or download the repository.
+-Navigate into the project directory.
+
+##Optionally create a virtual environment:
+
+-python -m venv <name_of_environment>
+-source venv/bin/activate    or  Windows: venv\Scripts\activate
+
+Install dependencies:
+-pip install -r requirements.txt
+
+##Run the Flask app:
+
+flask run python <flask_name>.py
+
+Open your browser to http://127.0.0.1:5000 and test the password validator.
+
+##Usage
+-Enter a password in the input field.
+-Submit the form to see validation results.
+-Password must meet all criteria for success.
+
+##Project Structure
+
+password-strength-checker-flask/
+│
+├── app.py                   # Main Flask app and password validation function
+├── requirements.txt         # Project dependencies
+├── templates/               # HTML templates
+│    └── index.html          # Form and message display
+├── static/                  # Optional folder for CSS/JS assets
+└── README.md                # This documentation
