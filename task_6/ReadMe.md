@@ -26,7 +26,7 @@ Technologies
 Installation
 
 1.Clone the repo:
-git clone https://github.com/your-username/square-sums-row.git
+git clone [https://github.com/your-username/square-sums-row.git](https://github.com/Joelwick147/katana_codes_main/tree/main/task_6)
 cd square-sums-row
 
 2. Create virtual environment:
